@@ -8,7 +8,7 @@ LIBS   = -lm
 TARGET = test
 
 # Using for mtrace to debug: mtrace output
-FLAGS += -DMTRACE
+#FLAGS += -DMTRACE
 
 # Using condition compile for debug: make DEBUG=1
 ifeq ($(DEBUG), 1) 
