@@ -4,13 +4,16 @@
 #include "hash.h"
 
 int main( int argc, char **argv ) {
+/* for trace memory leak */
 #if defined(MTRACE)
 	setenv("MALLOC_TRACE", "output", 1);  
 	mtrace();
 #endif
 
+	/* create hash table */
 	struct hashtable_s *hashtable = ht_create( 4 );
 	
+	/* Insertion */
 	ht_set( hashtable, "key3", "test value of key1" );
 	ht_set( hashtable, "key4", "math math math" );
 	ht_set( hashtable, "dennis", "happy cooking" );
@@ -21,6 +24,7 @@ int main( int argc, char **argv ) {
 	ht_set( hashtable, "key6", "key6test" );
 	ht_set( hashtable, "key7", "key7test" );
 
+	/* searching */
 	printf( "%s\n", ht_get( hashtable, "key3" ) );
 	printf( "%s\n", ht_get( hashtable, "key4" ) );
 	printf( "%s\n", ht_get( hashtable, "dennis" ) );
@@ -28,10 +32,21 @@ int main( int argc, char **argv ) {
 	printf( "%s\n", ht_get( hashtable, "key0" ) );
 	printf( "%s\n", ht_get( hashtable, "key1" ) );
 
+	/* show all */
 	show_hash_table(hashtable);
 
+	/* deletion */
+	ht_del(hashtable, "key0");
+	ht_del(hashtable, "key1");
+	ht_del(hashtable, "key3");
+
+	/* show all */
+	show_hash_table(hashtable);
+
+	/* free hash table */
 	ht_release(hashtable);
 
+/* for trace memory leak */
 #if defined(MTRACE)
 	muntrace();
 #endif
