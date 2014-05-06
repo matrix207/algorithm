@@ -12,13 +12,29 @@ Often this is done in two steps:
 
 a classic applicate is used for dict searching.
 
+Collision resolution
+====================
+1. Separate chaining
+
+2. Open addressing
+
+3. 2-choice hashing
+
 Features
 =========
-Advantages
-1.fast
+1. Advantages
 
-Drawbacks
-1.
+	1). fast, insert and find operation use O(1)
+
+2. Drawbacks
+
+Uses
+====
+1. symbol table, use on compiler
+
+2. spell checking
+
+3. caches
 
 Reference
 =========
