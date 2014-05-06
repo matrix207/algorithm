@@ -153,7 +153,7 @@ char *ht_get( struct hashtable_s *hashtable, char *key ) {
 	}
 }
 
-/* Need to implement? */
+/* delete pair from hash table */
 int ht_del( struct hashtable_s *hashtable, char *key ) { 
 	unsigned long i=0;
 	struct entry_s *cur;
