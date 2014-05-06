@@ -44,19 +44,16 @@ struct hashtable_s *ht_create( unsigned long size ) {
 	if( size < 1 ) return NULL;
 
 	/* Allocate the table itself. */
-	if( ( hashtable = malloc( sizeof( struct hashtable_s ) ) ) == NULL ) {
+	if( ( hashtable = malloc( sizeof( struct hashtable_s ) ) ) == NULL ) 
 		return NULL;
-	}
 
 	hashtable->size = next_prime(size);
 
 	/* Allocate pointers to the head nodes. */
-	if( ( hashtable->table = malloc( sizeof( struct entry_s * ) * hashtable->size ) ) == NULL ) {
+	if( ( hashtable->table = malloc( sizeof( struct entry_s * ) * hashtable->size ) ) == NULL ) 
 		return NULL;
-	}
-	for( i = 0; i < hashtable->size; i++ ) {
+	for( i = 0; i < hashtable->size; i++ ) 
 		hashtable->table[i] = NULL;
-	}
 
 	return hashtable;	
 }
@@ -76,17 +73,14 @@ static unsigned long ht_hash( struct hashtable_s *hashtable, char *key ) {
 static struct entry_s *ht_newpair( char *key, char *value ) {
 	struct entry_s *newpair;
 
-	if( ( newpair = malloc( sizeof( struct entry_s ) ) ) == NULL ) {
+	if( ( newpair = malloc( sizeof( struct entry_s ) ) ) == NULL )
 		return NULL;
-	}
 
-	if( ( newpair->key = strdup( key ) ) == NULL ) {
+	if( ( newpair->key = strdup( key ) ) == NULL )
 		return NULL;
-	}
 
-	if( ( newpair->value = strdup( value ) ) == NULL ) {
+	if( ( newpair->value = strdup( value ) ) == NULL ) 
 		return NULL;
-	}
 
 	newpair->next = NULL;
 
@@ -148,21 +142,43 @@ char *ht_get( struct hashtable_s *hashtable, char *key ) {
 
 	/* Step through the index, looking for our value. */
 	pair = hashtable->table[ index ];
-	while( pair != NULL && pair->key != NULL && strcmp( key, pair->key ) CMP_OPERATOR 0 ) {
+	while( pair != NULL && pair->key != NULL && strcmp( key, pair->key ) CMP_OPERATOR 0 ) 
 		pair = pair->next;
-	}
 
 	/* Did we actually find anything? */
 	if( pair == NULL || pair->key == NULL || strcmp( key, pair->key ) != 0 ) {
 		return NULL;
-
 	} else {
 		return pair->value;
 	}
 }
 
 /* Need to implement? */
-void ht_del( struct hashtable_s *hashtable, char *key ) { 
+int ht_del( struct hashtable_s *hashtable, char *key ) { 
+	unsigned long i=0;
+	struct entry_s *cur;
+	struct entry_s *prev;
+	for (;i<hashtable->size;i++) {
+		cur = prev = hashtable->table[i];
+		while (NULL != cur && NULL != cur->key) {
+			if (strcmp(key, cur->key) == 0) {
+				if (cur == hashtable->table[i]) {
+					hashtable->table[i] = cur->next;
+				} else {
+					prev->next = cur->next;
+				}
+				/* free */
+				free(cur->key);
+				free(cur->value);
+				free(cur);
+				return 0;
+			}
+			prev = cur;
+			cur = cur->next;
+		}
+	}
+
+	return 1;
 }
 
 /* release hashtable */
@@ -188,7 +204,8 @@ void ht_release( struct hashtable_s *hashtable ) {
 void show_hash_table(struct hashtable_s *hashtable) {
 	unsigned long i = 0; 
 	struct entry_s *tmp = NULL;
-	for (;i<hashtable->size;i++)
+	printf("------------Hask table view------------\n");
+	for (;i<hashtable->size;i++) {
 		if (hashtable->table[i]!=NULL) {
 			tmp = hashtable->table[i];
 			while (tmp != NULL) {
@@ -196,4 +213,6 @@ void show_hash_table(struct hashtable_s *hashtable) {
 				tmp = tmp->next;
 			}
 		}
+	}
+	printf("---------------------------------------\n");
 }
