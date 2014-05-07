@@ -41,6 +41,26 @@ Implement algorithm in c
 	 (4)项目管理  
 	 (5)网络流优化  
 
+Terminology
+===========
+algorithms 算法  
+array      数组  
+queue      队列  
+list       表  
+stack      栈  
+heap       堆  
+hash       散列  
+hash table 散列表  
+string     串  
+sort       排序  
+quick sort 快排  
+merge sort 归并  
+heap sort  堆排  
+tree       树  
+graph      图  
+dynamic programming 动态规划  
+greedy algorithms   贪婪算法  
+
 Reference
 =========
 * [algorithm list from wikipedia](http://en.wikipedia.org/wiki/List_of_algorithms)
