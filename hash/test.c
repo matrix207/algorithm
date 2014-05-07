@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <mcheck.h>  /* for mtrace */
 #include "hash.h"
+#include <math.h>
 
 int main( int argc, char **argv ) {
 /* for trace memory leak */
@@ -11,40 +12,40 @@ int main( int argc, char **argv ) {
 #endif
 
 	/* create hash table */
-	struct hashtable_s *hashtable = ht_create( 4 );
+	struct hashtable *pht = ht_create( 4 );
 	
 	/* Insertion */
-	ht_set( hashtable, "key3", "test value of key1" );
-	ht_set( hashtable, "key4", "math math math" );
-	ht_set( hashtable, "dennis", "happy cooking" );
-	ht_set( hashtable, "tina", "funny life" );
-	ht_set( hashtable, "key0", "key0test" );
-	ht_set( hashtable, "key1", "key1test" );
-	ht_set( hashtable, "key9", "key9test" );
-	ht_set( hashtable, "key6", "key6test" );
-	ht_set( hashtable, "key7", "key7test" );
+	ht_set( pht, "key3", "test value of key1" );
+	ht_set( pht, "key4", "math math math" );
+	ht_set( pht, "dennis", "happy cooking" );
+	ht_set( pht, "tina", "funny life" );
+	ht_set( pht, "key0", "key0test" );
+	ht_set( pht, "key1", "key1test" );
+	ht_set( pht, "key9", "key9test" );
+	ht_set( pht, "key6", "key6test" );
+	ht_set( pht, "key7", "key7test" );
 
 	/* searching */
-	printf( "%s\n", ht_get( hashtable, "key3" ) );
-	printf( "%s\n", ht_get( hashtable, "key4" ) );
-	printf( "%s\n", ht_get( hashtable, "dennis" ) );
-	printf( "%s\n", ht_get( hashtable, "tina" ) );
-	printf( "%s\n", ht_get( hashtable, "key0" ) );
-	printf( "%s\n", ht_get( hashtable, "key1" ) );
+	printf( "%s\n", ht_get( pht, "key3" ) );
+	printf( "%s\n", ht_get( pht, "key4" ) );
+	printf( "%s\n", ht_get( pht, "dennis" ) );
+	printf( "%s\n", ht_get( pht, "tina" ) );
+	printf( "%s\n", ht_get( pht, "key0" ) );
+	printf( "%s\n", ht_get( pht, "key1" ) );
 
 	/* show all */
-	show_hash_table(hashtable);
+	show_hash_table(pht);
 
 	/* deletion */
-	ht_del(hashtable, "key0");
-	ht_del(hashtable, "key1");
-	ht_del(hashtable, "key3");
+	ht_del(pht, "key0");
+	ht_del(pht, "key1");
+	ht_del(pht, "key3");
 
 	/* show all */
-	show_hash_table(hashtable);
+	show_hash_table(pht);
 
 	/* free hash table */
-	ht_release(hashtable);
+	ht_release(pht);
 
 /* for trace memory leak */
 #if defined(MTRACE)
