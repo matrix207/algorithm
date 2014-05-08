@@ -58,6 +58,7 @@ merge sort 归并
 heap sort  堆排  
 tree       树  
 graph      图  
+red-black tree 红黑树  
 dynamic programming 动态规划  
 greedy algorithms   贪婪算法  
 
